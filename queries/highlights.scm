@@ -3,16 +3,16 @@
 (type_declaration) @type
 
 (function_declaration
-	(identifier) @function)
+    (identifier) @function)
 
 (type_constructor_or_function_call_expression
-	(type_declaration) @function)
+    (type_declaration) @function)
 
 ["fn"] @keyword
 
 [
-	(true)
-	(false)
+    (true)
+    (false)
 ] @constant.builtin
 
 ;; punctuation
@@ -20,39 +20,39 @@
 
 ;; brackets
 [
-	"("
-	")"
-	"["
-	"]"
-	"{"
-	"}"
+    "("
+    ")"
+    "["
+    "]"
+    "{"
+    "}"
 ] @punctuation.bracket
 
 [
-	"loop"
-	"for"
-	"break"
-	"continue"
-	"continuing"
+    "loop"
+    "for"
+    "break"
+    "continue"
+    "continuing"
 ] @repeat
 
 [
-	"if"
-	"else"
-	"elseif"
-	"switch"
-	"case"
-	"default"
+    "if"
+    "else"
+    "elseif"
+    "switch"
+    "case"
+    "default"
 ] @conditional
 
 [
-	"||"
-	"&&"
-	"|"
-	"^"
-	"&"
-	"=="
-	"!="
+    "||"
+    "&&"
+    "|"
+    "^"
+    "&"
+    "=="
+    "!="
 ] @operator
 
 (ERROR) @error

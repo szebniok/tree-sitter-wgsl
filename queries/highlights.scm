@@ -8,7 +8,26 @@
 (type_constructor_or_function_call_expression
     (type_declaration) @function)
 
-["fn"] @keyword
+[
+    "struct"
+    "bitcast"
+    ; "block"
+    "discard"
+    "enable"
+    "fallthrough"
+    "fn"
+    "let"
+    "private"
+    "read"
+    "read_write"
+    "return"
+    "storage"
+    "type"
+    "uniform"
+    "var"
+    "workgroup"
+    "write"
+] @keyword ; TODO reserved keywords
 
 [
     (true)
@@ -46,13 +65,30 @@
 ] @conditional
 
 [
-    "||"
-    "&&"
-    "|"
-    "^"
     "&"
+    "&&"
+    "/"
+    "!"
+    "="
     "=="
     "!="
+    ">"
+    ">="
+    ">>"
+    "<"
+    "<="
+    "<<"
+    "%"
+    "-"
+    "+"
+    "|"
+    "||"
+    "*"
+    "~"
+    "^"
 ] @operator
+
+(attribute
+    (identifier) @property)
 
 (ERROR) @error

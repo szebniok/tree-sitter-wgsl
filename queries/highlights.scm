@@ -91,4 +91,6 @@
 (attribute
     (identifier) @property)
 
+(comment) @comment
+
 (ERROR) @error

@@ -278,6 +278,11 @@
     }
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "composite_value_decomposition_expression",
     "named": true,
     "fields": {},
@@ -1397,6 +1402,10 @@
   },
   {
     "type": "/",
+    "named": false
+  },
+  {
+    "type": "//",
     "named": false
   },
   {

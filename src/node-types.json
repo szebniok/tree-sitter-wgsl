@@ -627,14 +627,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "attribute_list",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "type_declaration",
           "named": true
         }
       ]

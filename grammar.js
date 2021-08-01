@@ -61,7 +61,7 @@ module.exports = grammar({
         function_return_type_declaration: $ => seq(
             "->",
             repeat($.attribute_list),
-            $._type,
+            $.type_declaration,
         ),
 
         struct_declaration: $ => seq(
@@ -125,8 +125,6 @@ module.exports = grammar({
             repeat($.attribute_list),
             $.variable_identifier_declaration
         ),
-
-        _type: $ => choice($.identifier, /vec.<f32>/),
 
         _statement: $ => choice(
             $.compound_statement,

@@ -340,7 +340,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_type"
+          "name": "type_declaration"
         }
       ]
     },
@@ -554,19 +554,6 @@
         {
           "type": "SYMBOL",
           "name": "variable_identifier_declaration"
-        }
-      ]
-    },
-    "_type": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "PATTERN",
-          "value": "vec.<f32>"
         }
       ]
     },

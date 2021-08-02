@@ -27,6 +27,7 @@
     "var"
     "workgroup"
     "write"
+    (texel_format)
 ] @keyword ; TODO reserved keywords
 
 [
@@ -34,7 +35,6 @@
     (false)
 ] @constant.builtin
 
-;; punctuation
 [ "," "." ":" ";" ] @punctuation.delimeter
 
 ;; brackets

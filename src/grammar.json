@@ -1403,6 +1403,18 @@
       "members": [
         {
           "type": "STRING",
+          "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "u32"
+        },
+        {
+          "type": "STRING",
+          "value": "i32"
+        },
+        {
+          "type": "STRING",
           "value": "f32"
         },
         {
@@ -1415,6 +1427,27 @@
             {
               "type": "STRING",
               "value": "vec2"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "vec3"
             },
             {
               "type": "STRING",
@@ -1456,6 +1489,174 @@
           "members": [
             {
               "type": "STRING",
+              "value": "mat2x2"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat2x3"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat2x4"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat3x2"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat3x3"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat3x4"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat4x2"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "mat4x3"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
               "value": "mat4x4"
             },
             {
@@ -1465,6 +1666,36 @@
             {
               "type": "SYMBOL",
               "name": "type_declaration"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "atomic"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                }
+              ]
             },
             {
               "type": "STRING",
@@ -1565,8 +1796,527 @@
           ]
         },
         {
+          "type": "STRING",
+          "value": "sampler"
+        },
+        {
+          "type": "STRING",
+          "value": "sampler_comparison"
+        },
+        {
+          "type": "STRING",
+          "value": "texture_depth_2d"
+        },
+        {
+          "type": "STRING",
+          "value": "texture_depth_2d_array"
+        },
+        {
+          "type": "STRING",
+          "value": "texture_depth_cube"
+        },
+        {
+          "type": "STRING",
+          "value": "texture_depth_cube_array"
+        },
+        {
+          "type": "STRING",
+          "value": "texture_depth_multisampled_2d"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_1d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_2d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_2d_array"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_3d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_cube"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_cube_array"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_multisampled_2d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "f32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "i32"
+                },
+                {
+                  "type": "STRING",
+                  "value": "u32"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_storage_1d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "texel_format"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "SYMBOL",
+              "name": "access_mode"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_storage_2d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "texel_format"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "SYMBOL",
+              "name": "access_mode"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_storage_2d_array"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "texel_format"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "SYMBOL",
+              "name": "access_mode"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "texture_storage_3d"
+            },
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "texel_format"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "SYMBOL",
+              "name": "access_mode"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "identifier"
+        }
+      ]
+    },
+    "texel_format": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "r8unorm"
+        },
+        {
+          "type": "STRING",
+          "value": "r8snorm"
+        },
+        {
+          "type": "STRING",
+          "value": "r8uint"
+        },
+        {
+          "type": "STRING",
+          "value": "r8sint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg8unorm"
+        },
+        {
+          "type": "STRING",
+          "value": "rg8snorm"
+        },
+        {
+          "type": "STRING",
+          "value": "rg8uint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg8sint"
+        },
+        {
+          "type": "STRING",
+          "value": "r16uint"
+        },
+        {
+          "type": "STRING",
+          "value": "r16sint"
+        },
+        {
+          "type": "STRING",
+          "value": "r16float"
+        },
+        {
+          "type": "STRING",
+          "value": "rg16uint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg16sint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg16float"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba16uint"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba16sint"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba16float"
+        },
+        {
+          "type": "STRING",
+          "value": "r32uint"
+        },
+        {
+          "type": "STRING",
+          "value": "r32sint"
+        },
+        {
+          "type": "STRING",
+          "value": "r32float"
+        },
+        {
+          "type": "STRING",
+          "value": "rg32uint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg32sint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg32float"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba32uint"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba32sint"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba32float"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba8unorm"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba8unorm_srgb"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba8snorm"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba8uint"
+        },
+        {
+          "type": "STRING",
+          "value": "rgba8sint"
+        },
+        {
+          "type": "STRING",
+          "value": "rg10a2unorm"
+        },
+        {
+          "type": "STRING",
+          "value": "rg11b10float"
         }
       ]
     },

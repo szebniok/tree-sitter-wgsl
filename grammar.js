@@ -307,15 +307,14 @@ module.exports = grammar({
         ),
 
         type_declaration: $ => choice(
-            // TODO add missing types
+            "bool",
+            "u32",
+            "i32",
             "f32",
             "i32",
-            ...["vec2", "vec4", "mat4x4"].map(t => seq(
-                t,
-                "<",
-                $.type_declaration,
-                ">"
-            )),
+            ...[2, 3, 4].map(n => "vec" + n).map(t => withTypeParameter($, t)),
+            ...cartesianProduct([2, 3, 4], [2, 3, 4]).map(([n, m]) => `mat${n}x${m}`).map(t => withTypeParameter($, t)),
+            withTypeParameter($, "atomic", choice("u32", "i32")),
             seq(
                 //repeat($.attribute_list), // TODO ambiguous grammar? conflicting with variable_identifier_declaration
                 "array",
@@ -325,7 +324,25 @@ module.exports = grammar({
                 ">"
             ),
             seq("ptr", "<", $.storage_class, ",", $.type_declaration, optional(seq(",", $.access_mode)), ">"),
+            "sampler",
+            "sampler_comparison",
+            ...["2d", "2d_array", "cube", "cube_array", "multisampled_2d"]
+                .map(s => "texture_depth_" + s),
+            ...["1d", "2d", "2d_array", "3d", "cube", "cube_array", "multisampled_2d"]
+                .map(s => "texture_" + s)
+                .map(t => withTypeParameter($, t, choice("f32", "i32", "u32"))),
+            ...["1d", "2d", "2d_array", "3d"]
+                .map(s => "texture_storage_" + s)
+                .map(t => seq(t, "<", $.texel_format, ",", $.access_mode, ">")),
             $.identifier,
+        ),
+
+        texel_format: $ => choice(
+            ...cartesianProduct(["r8", "rg8"], ["unorm", "snorm", "uint", "sint"]).map(([t, s]) => t + s),
+            ...cartesianProduct(["r16", "rg16", "rgba16", "r32", "rg32", "rgba32"], ["uint", "sint", "float"]).map(([t, s]) => t + s),
+            ...["unorm", "unorm_srgb", "snorm", "uint", "sint"].map(s => "rgba8" + s),
+            "rg10a2unorm",
+            "rg11b10float"
         ),
 
         storage_class: $ => choice("function", "private", "workgroup", "uniform", "storage"),
@@ -390,12 +407,14 @@ module.exports = grammar({
         composite_value_decomposition_expression: $ => seq(
             $._expression, ".", $.identifier
         )
-
-
-        // function_call_expression: $ => seq(
-        //     $.identifier,
-        //     $.argument_list_expression,
-        // ),
-
     }
 })
+
+function withTypeParameter($, type, allowed_type_params) {
+    const type_param = allowed_type_params ?? $.type_declaration
+    return seq(type, "<", type_param, ">");
+}
+
+function cartesianProduct(...lists) {
+    return lists.reduce((as, bs) => as.flatMap(a => bs.map(b => [a, b].flat())))
+}

@@ -1100,6 +1100,11 @@
     }
   },
   {
+    "type": "texel_format",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "type_alias",
     "named": true,
     "fields": {},
@@ -1163,6 +1168,10 @@
         },
         {
           "type": "storage_class",
+          "named": true
+        },
+        {
+          "type": "texel_format",
           "named": true
         },
         {
@@ -1473,7 +1482,15 @@
     "named": false
   },
   {
+    "type": "atomic",
+    "named": false
+  },
+  {
     "type": "bitcast",
+    "named": false
+  },
+  {
+    "type": "bool",
     "named": false
   },
   {
@@ -1561,6 +1578,38 @@
     "named": false
   },
   {
+    "type": "mat2x2",
+    "named": false
+  },
+  {
+    "type": "mat2x3",
+    "named": false
+  },
+  {
+    "type": "mat2x4",
+    "named": false
+  },
+  {
+    "type": "mat3x2",
+    "named": false
+  },
+  {
+    "type": "mat3x3",
+    "named": false
+  },
+  {
+    "type": "mat3x4",
+    "named": false
+  },
+  {
+    "type": "mat4x2",
+    "named": false
+  },
+  {
+    "type": "mat4x3",
+    "named": false
+  },
+  {
     "type": "mat4x4",
     "named": false
   },
@@ -1570,6 +1619,46 @@
   },
   {
     "type": "ptr",
+    "named": false
+  },
+  {
+    "type": "r16float",
+    "named": false
+  },
+  {
+    "type": "r16sint",
+    "named": false
+  },
+  {
+    "type": "r16uint",
+    "named": false
+  },
+  {
+    "type": "r32float",
+    "named": false
+  },
+  {
+    "type": "r32sint",
+    "named": false
+  },
+  {
+    "type": "r32uint",
+    "named": false
+  },
+  {
+    "type": "r8sint",
+    "named": false
+  },
+  {
+    "type": "r8snorm",
+    "named": false
+  },
+  {
+    "type": "r8uint",
+    "named": false
+  },
+  {
+    "type": "r8unorm",
     "named": false
   },
   {
@@ -1585,6 +1674,106 @@
     "named": false
   },
   {
+    "type": "rg10a2unorm",
+    "named": false
+  },
+  {
+    "type": "rg11b10float",
+    "named": false
+  },
+  {
+    "type": "rg16float",
+    "named": false
+  },
+  {
+    "type": "rg16sint",
+    "named": false
+  },
+  {
+    "type": "rg16uint",
+    "named": false
+  },
+  {
+    "type": "rg32float",
+    "named": false
+  },
+  {
+    "type": "rg32sint",
+    "named": false
+  },
+  {
+    "type": "rg32uint",
+    "named": false
+  },
+  {
+    "type": "rg8sint",
+    "named": false
+  },
+  {
+    "type": "rg8snorm",
+    "named": false
+  },
+  {
+    "type": "rg8uint",
+    "named": false
+  },
+  {
+    "type": "rg8unorm",
+    "named": false
+  },
+  {
+    "type": "rgba16float",
+    "named": false
+  },
+  {
+    "type": "rgba16sint",
+    "named": false
+  },
+  {
+    "type": "rgba16uint",
+    "named": false
+  },
+  {
+    "type": "rgba32float",
+    "named": false
+  },
+  {
+    "type": "rgba32sint",
+    "named": false
+  },
+  {
+    "type": "rgba32uint",
+    "named": false
+  },
+  {
+    "type": "rgba8sint",
+    "named": false
+  },
+  {
+    "type": "rgba8snorm",
+    "named": false
+  },
+  {
+    "type": "rgba8uint",
+    "named": false
+  },
+  {
+    "type": "rgba8unorm",
+    "named": false
+  },
+  {
+    "type": "rgba8unorm_srgb",
+    "named": false
+  },
+  {
+    "type": "sampler",
+    "named": false
+  },
+  {
+    "type": "sampler_comparison",
+    "named": false
+  },
+  {
     "type": "storage",
     "named": false
   },
@@ -1597,11 +1786,79 @@
     "named": false
   },
   {
+    "type": "texture_1d",
+    "named": false
+  },
+  {
+    "type": "texture_2d",
+    "named": false
+  },
+  {
+    "type": "texture_2d_array",
+    "named": false
+  },
+  {
+    "type": "texture_3d",
+    "named": false
+  },
+  {
+    "type": "texture_cube",
+    "named": false
+  },
+  {
+    "type": "texture_cube_array",
+    "named": false
+  },
+  {
+    "type": "texture_depth_2d",
+    "named": false
+  },
+  {
+    "type": "texture_depth_2d_array",
+    "named": false
+  },
+  {
+    "type": "texture_depth_cube",
+    "named": false
+  },
+  {
+    "type": "texture_depth_cube_array",
+    "named": false
+  },
+  {
+    "type": "texture_depth_multisampled_2d",
+    "named": false
+  },
+  {
+    "type": "texture_multisampled_2d",
+    "named": false
+  },
+  {
+    "type": "texture_storage_1d",
+    "named": false
+  },
+  {
+    "type": "texture_storage_2d",
+    "named": false
+  },
+  {
+    "type": "texture_storage_2d_array",
+    "named": false
+  },
+  {
+    "type": "texture_storage_3d",
+    "named": false
+  },
+  {
     "type": "true",
     "named": true
   },
   {
     "type": "type",
+    "named": false
+  },
+  {
+    "type": "u32",
     "named": false
   },
   {
@@ -1618,6 +1875,10 @@
   },
   {
     "type": "vec2",
+    "named": false
+  },
+  {
+    "type": "vec3",
     "named": false
   },
   {

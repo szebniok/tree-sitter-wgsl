@@ -15,6 +15,19 @@ WGSL is a shading language created as a part of [WebGPU](https://www.w3.org/comm
 
 Please note that both the WebGPU and WGSL spec are still under development.
 
+## Showcase
+
+### Code highlighting
+
+![Code highlighting](./assets/code-highlighting.png)
+
+### Incremental selection
+
+![Incremental selection](./assets/incremental-selection.gif)
+
+### Folding
+![Folding](./assets/folding.gif)
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.

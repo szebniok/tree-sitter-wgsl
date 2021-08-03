@@ -225,7 +225,7 @@ module.exports = grammar({
 
         continuing_statement: $ => seq("continuing", $.compound_statement),
 
-        return_statement: $ => seq("return", $._expression),
+        return_statement: $ => seq("return", optional($._expression)),
 
         discard_statement: $ => seq("discard", ";"),
 

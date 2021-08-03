@@ -5,8 +5,14 @@
 (function_declaration
     (identifier) @function)
 
+(struct_declaration
+    (identifier) @structure)
+
 (type_constructor_or_function_call_expression
     (type_declaration) @function)
+
+(parameter
+    (variable_identifier_declaration (identifier) @parameter))
 
 [
     "struct"
@@ -33,9 +39,9 @@
 [
     (true)
     (false)
-] @constant.builtin
+] @boolean
 
-[ "," "." ":" ";" ] @punctuation.delimeter
+[ "," "." ":" ";" ] @punctuation.delimiter
 
 ;; brackets
 [

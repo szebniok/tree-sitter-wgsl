@@ -400,13 +400,13 @@ module.exports = grammar({
             )
         ),
 
-        subscript_expression: $ => seq(
+        subscript_expression: $ => prec(PREC.UNARY, seq(
             $._expression, "[", $._expression, "]"
-        ),
+        )),
 
-        composite_value_decomposition_expression: $ => seq(
+        composite_value_decomposition_expression: $ => prec(PREC.UNARY, seq(
             $._expression, ".", $.identifier
-        )
+        ))
     }
 })
 

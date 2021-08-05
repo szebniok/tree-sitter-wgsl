@@ -273,7 +273,6 @@ module.exports = grammar({
             $.binary_expression,
             $.unary_expression,
             $.subscript_expression,
-            // $.function_call_expression,
             $.identifier,
         ),
 
@@ -290,8 +289,8 @@ module.exports = grammar({
         uint_literal: $ => /0x[0-9a-fA-F]u+|0u|[1-9][0-9]*u/,
 
         float_literal: $ => choice(
-            // /-?0x([0-9a-fA-F]*\.?[0-9a-fA-F]+|[0-9a-fA-F]+\.[0-9a-fA-F]*)(p|P)(\+|-)?[0-9]+/
-            /-?([0-9]*\.[0-9]+|[0-9]+\.[0-9]*)((e|E)(\+|-)?[0-9]+)?/,
+            /-?(([0-9]*\.[0-9]+)|([0-9]+\.[0-9]*))((e|E)(\+|-)?[0-9]+)?/,
+            /-?0x(([0-9a-fA-F]*\.[0-9a-fA-F]+)|([0-9a-fA-F]+\.[0-9a-fA-F]*))(p|P)(\+|-)?[0-9]+/
         ),
 
         true: $ => "true",

@@ -75,11 +75,13 @@ module.exports = grammar({
         struct_declaration: $ => seq(
             repeat($.attribute_list),
             "struct",
-            $.identifier,
+            field("name", $.identifier),
             "{",
-            repeat($.struct_member),
+            field("body", optional($.struct_member_list)),
             "}"
         ),
+
+        struct_member_list: $ => repeat1($.struct_member),
 
         struct_member: $ => seq(
             repeat($.attribute_list),

@@ -58,12 +58,12 @@ module.exports = grammar({
         function_declaration: $ => seq(
             repeat($.attribute_list),
             "fn",
-            $.identifier,
+            field("name", $.identifier),
             "(",
-            optional($.parameter_list),
+            field("parameters", optional($.parameter_list)),
             ")",
-            optional($.function_return_type_declaration),
-            $.compound_statement
+            field("type", optional($.function_return_type_declaration)),
+            field("body", $.compound_statement)
         ),
 
         function_return_type_declaration: $ => seq(

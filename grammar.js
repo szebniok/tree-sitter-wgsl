@@ -388,13 +388,13 @@ module.exports = grammar({
                 ["*", PREC.MUL],
                 ["/", PREC.MUL],
                 ["%", PREC.MUL],
-            ].map(([op, p]) => prec.left(p, seq($._expression, op, $._expression))),
+            ].map(([op, p]) => prec.left(p, seq(field("left", $._expression), op, field("right", $._expression)))),
         ),
 
         unary_expression: $ => prec.left(PREC.UNARY,
             seq(
                 choice("-", "!", "~", "*", "&"),
-                $._expression
+                field("argument", $._expression)
             )
         ),
 

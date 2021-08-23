@@ -153,9 +153,9 @@ module.exports = grammar({
         compound_statement: $ => seq("{", repeat($._statement), "}"),
 
         assignment_statement: $ => seq(
-            $._expression, // TODO singular expression
+            field("left", $._expression), // TODO singular expression
             "=",
-            $._expression,
+            field("right", $._expression),
         ),
 
         if_statement: $ => seq(

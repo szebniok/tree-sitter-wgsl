@@ -399,11 +399,11 @@ module.exports = grammar({
         ),
 
         subscript_expression: $ => prec(PREC.UNARY, seq(
-            $._expression, "[", $._expression, "]"
+            field("value", $._expression), "[", field("subscript", $._expression), "]"
         )),
 
         composite_value_decomposition_expression: $ => prec(PREC.UNARY, seq(
-            $._expression, ".", $.identifier
+            field("value", $._expression), ".", field("accessor", $.identifier)
         ))
     }
 })

@@ -727,36 +727,47 @@
           "value": "if"
         },
         {
-          "type": "SYMBOL",
-          "name": "parenthesized_expression"
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "parenthesized_expression"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "compound_statement"
+          "type": "FIELD",
+          "name": "consequence",
+          "content": {
+            "type": "SYMBOL",
+            "name": "compound_statement"
+          }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
+          "type": "REPEAT",
+          "content": {
+            "type": "FIELD",
+            "name": "alternative",
+            "content": {
               "type": "SYMBOL",
               "name": "elseif_statement"
-            },
-            {
-              "type": "BLANK"
             }
-          ]
+          }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "else_statement"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "FIELD",
+          "name": "alternative",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "else_statement"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
         }
       ]
     },
@@ -774,18 +785,6 @@
         {
           "type": "SYMBOL",
           "name": "compound_statement"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "elseif_statement"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },

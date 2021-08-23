@@ -158,20 +158,18 @@ module.exports = grammar({
             $._expression,
         ),
 
-
         if_statement: $ => seq(
             "if",
-            $.parenthesized_expression,
-            $.compound_statement,
-            optional($.elseif_statement),
-            optional($.else_statement)
+            field("condition", $.parenthesized_expression),
+            field("consequence", $.compound_statement),
+            repeat(field("alternative", $.elseif_statement)),
+            field("alternative", optional($.else_statement))
         ),
 
         elseif_statement: $ => seq(
             "elseif",
             $.parenthesized_expression,
             $.compound_statement,
-            optional($.elseif_statement),
         ),
 
         else_statement: $ => seq(

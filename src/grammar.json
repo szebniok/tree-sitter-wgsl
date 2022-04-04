@@ -533,10 +533,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "uint_literal"
-        },
-        {
-          "type": "SYMBOL",
           "name": "identifier"
         }
       ]
@@ -1363,50 +1359,43 @@
         },
         {
           "type": "SYMBOL",
-          "name": "uint_literal"
-        },
-        {
-          "type": "SYMBOL",
           "name": "float_literal"
         },
         {
           "type": "SYMBOL",
-          "name": "true"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "false"
+          "name": "bool_literal"
         }
       ]
     },
     "int_literal": {
       "type": "PATTERN",
-      "value": "-?0x[0-9a-fA-F]+|0|-?[1-9][0-9]*"
-    },
-    "uint_literal": {
-      "type": "PATTERN",
-      "value": "0x[0-9a-fA-F]u+|0u|[1-9][0-9]*u"
+      "value": "(-?0[xX][0-9a-fA-F]+|0|-?[1-9][0-9]*)[iu]?"
     },
     "float_literal": {
       "type": "CHOICE",
       "members": [
         {
           "type": "PATTERN",
-          "value": "-?(([0-9]*\\.[0-9]+)|([0-9]+\\.[0-9]*))((e|E)(\\+|-)?[0-9]+)?"
+          "value": "(-?(([0-9]*\\.[0-9]+|[0-9]+\\.[0-9]*)([eE](\\+|-)?[0-9]+)?)|([0-9]+[eE](\\+|-)?[0-9]+))f?|0f|-?[1-9][0-9]*f"
         },
         {
           "type": "PATTERN",
-          "value": "-?0x(([0-9a-fA-F]*\\.[0-9a-fA-F]+)|([0-9a-fA-F]+\\.[0-9a-fA-F]*))(p|P)(\\+|-)?[0-9]+"
+          "value": "-?0[xX]((([0-9a-fA-F]*\\.[0-9a-fA-F]+|[0-9a-fA-F]+\\.[0-9a-fA-F]*)([pP](\\+|-)?[0-9]+f?)?)|([0-9a-fA-F]+[pP](\\+|-)?[0-9]+f?))"
         }
       ]
     },
-    "true": {
-      "type": "STRING",
-      "value": "true"
-    },
-    "false": {
-      "type": "STRING",
-      "value": "false"
+    "bool_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "true"
+        },
+        {
+          "type": "STRING",
+          "value": "false"
+        }
+      ]
     },
     "parenthesized_expression": {
       "type": "SEQ",

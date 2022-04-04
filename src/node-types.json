@@ -270,6 +270,11 @@
     }
   },
   {
+    "type": "bool_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "break_statement",
     "named": true,
     "fields": {}
@@ -498,7 +503,7 @@
       "required": true,
       "types": [
         {
-          "type": "false",
+          "type": "bool_literal",
           "named": true
         },
         {
@@ -507,14 +512,6 @@
         },
         {
           "type": "int_literal",
-          "named": true
-        },
-        {
-          "type": "true",
-          "named": true
-        },
-        {
-          "type": "uint_literal",
           "named": true
         }
       ]
@@ -852,10 +849,6 @@
         },
         {
           "type": "int_literal",
-          "named": true
-        },
-        {
-          "type": "uint_literal",
           "named": true
         }
       ]
@@ -1703,7 +1696,7 @@
   },
   {
     "type": "false",
-    "named": true
+    "named": false
   },
   {
     "type": "fn",
@@ -2015,7 +2008,7 @@
   },
   {
     "type": "true",
-    "named": true
+    "named": false
   },
   {
     "type": "type",
@@ -2024,10 +2017,6 @@
   {
     "type": "u32",
     "named": false
-  },
-  {
-    "type": "uint_literal",
-    "named": true
   },
   {
     "type": "uniform",

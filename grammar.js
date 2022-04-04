@@ -107,7 +107,6 @@ module.exports = grammar({
         literal_or_identifier: $ => choice(
             $.float_literal,
             $.int_literal,
-            $.uint_literal,
             $.identifier,
         ),
 
@@ -267,24 +266,18 @@ module.exports = grammar({
 
         const_literal: $ => choice(
             $.int_literal,
-            $.uint_literal,
             $.float_literal,
-            $.true,
-            $.false
+            $.bool_literal,
         ),
 
-        int_literal: $ => /-?0x[0-9a-fA-F]+|0|-?[1-9][0-9]*/,
-
-        uint_literal: $ => /0x[0-9a-fA-F]u+|0u|[1-9][0-9]*u/,
+        int_literal: $ => /(-?0[xX][0-9a-fA-F]+|0|-?[1-9][0-9]*)[iu]?/,
 
         float_literal: $ => choice(
-            /-?(([0-9]*\.[0-9]+)|([0-9]+\.[0-9]*))((e|E)(\+|-)?[0-9]+)?/,
-            /-?0x(([0-9a-fA-F]*\.[0-9a-fA-F]+)|([0-9a-fA-F]+\.[0-9a-fA-F]*))(p|P)(\+|-)?[0-9]+/
+            /(-?(([0-9]*\.[0-9]+|[0-9]+\.[0-9]*)([eE](\+|-)?[0-9]+)?)|([0-9]+[eE](\+|-)?[0-9]+))f?|0f|-?[1-9][0-9]*f/,
+            /-?0[xX]((([0-9a-fA-F]*\.[0-9a-fA-F]+|[0-9a-fA-F]+\.[0-9a-fA-F]*)([pP](\+|-)?[0-9]+f?)?)|([0-9a-fA-F]+[pP](\+|-)?[0-9]+f?))/
         ),
 
-        true: $ => "true",
-
-        false: $ => "false",
+        bool_literal: $ => choice("true", "false"),
 
         parenthesized_expression: $ => seq("(", $._expression, ")"),
 

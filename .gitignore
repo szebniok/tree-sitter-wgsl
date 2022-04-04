@@ -6,3 +6,5 @@ build
 /parser.lib
 /parser.obj
 /scanner.obj
+target
+Cargo.lock

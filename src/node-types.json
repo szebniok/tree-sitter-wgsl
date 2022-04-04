@@ -161,21 +161,6 @@
     }
   },
   {
-    "type": "attribute_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "binary_expression",
     "named": true,
     "fields": {
@@ -738,7 +723,7 @@
       "required": false,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         }
       ]
@@ -753,7 +738,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         },
         {
@@ -772,7 +757,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         },
         {
@@ -795,7 +780,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         },
         {
@@ -944,7 +929,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         },
         {
@@ -1127,16 +1112,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "attribute_list",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1148,7 +1123,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         },
         {
@@ -1315,7 +1290,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute_list",
+          "type": "attribute",
           "named": true
         },
         {
@@ -1474,16 +1449,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "attribute_list",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1661,19 +1626,15 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
   {
-    "type": "[[",
-    "named": false
-  },
-  {
     "type": "]",
-    "named": false
-  },
-  {
-    "type": "]]",
     "named": false
   },
   {

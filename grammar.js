@@ -39,15 +39,15 @@ module.exports = grammar({
         ),
 
         global_variable_declaration: $ => seq(
-            repeat($.attribute_list), $.variable_declaration, optional(seq("=", $.const_expression))
+            repeat($.attribute), $.variable_declaration, optional(seq("=", $.const_expression))
         ),
 
         global_constant_declaration: $ => seq(
-            repeat($.attribute_list), "let", $.variable_identifier_declaration, optional(seq("=", $.const_expression))
+            repeat($.attribute), "let", $.variable_identifier_declaration, optional(seq("=", $.const_expression))
         ),
 
         type_alias: $ => seq(
-            "type", $.identifier, "=", repeat($.attribute_list), $.type_declaration
+            "type", $.identifier, "=", repeat($.attribute), $.type_declaration
         ),
 
         const_expression: $ => prec.left(choice(
@@ -56,7 +56,7 @@ module.exports = grammar({
         )),
 
         function_declaration: $ => seq(
-            repeat($.attribute_list),
+            repeat($.attribute),
             "fn",
             field("name", $.identifier),
             "(",
@@ -68,12 +68,11 @@ module.exports = grammar({
 
         function_return_type_declaration: $ => seq(
             "->",
-            repeat($.attribute_list),
+            repeat($.attribute),
             $.type_declaration,
         ),
 
         struct_declaration: $ => seq(
-            repeat($.attribute_list),
             "struct",
             field("name", $.identifier),
             "{",
@@ -84,31 +83,22 @@ module.exports = grammar({
         struct_member_list: $ => repeat1($.struct_member),
 
         struct_member: $ => seq(
-            repeat($.attribute_list),
+            repeat($.attribute),
             $.variable_identifier_declaration,
             ";"
         ),
 
         enable_directive: $ => seq("enable", $.identifier),
 
-        attribute_list: $ => seq(
-            "[[",
-            repeat(
-                seq(
-                    $.attribute,
-                    ","
-                )
-            ),
-            $.attribute,
-            "]]"
-        ),
-
         attribute: $ => seq(
+            "@",
             $.identifier,
             optional(
                 seq(
                     "(",
+                    repeat(seq($.literal_or_identifier, ",")),
                     $.literal_or_identifier,
+                    optional(","),
                     ")"
                 )
             )
@@ -132,7 +122,7 @@ module.exports = grammar({
         ),
 
         parameter: $ => seq(
-            repeat($.attribute_list),
+            repeat($.attribute),
             $.variable_identifier_declaration
         ),
 
@@ -257,7 +247,6 @@ module.exports = grammar({
         variable_identifier_declaration: $ => seq(
             field("name", $.identifier),
             ":",
-            repeat($.attribute_list),
             field("type", $.type_declaration)
         ),
 

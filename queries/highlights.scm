@@ -17,7 +17,6 @@
 [
     "struct"
     "bitcast"
-    ; "block"
     "discard"
     "enable"
     "fallthrough"
@@ -92,6 +91,7 @@
     "*"
     "~"
     "^"
+    "@"
 ] @operator
 
 (attribute

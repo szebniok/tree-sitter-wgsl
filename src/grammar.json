@@ -107,7 +107,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -144,7 +144,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -197,7 +197,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -288,7 +288,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -364,7 +364,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -376,13 +376,6 @@
     "struct_declaration": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "attribute_list"
-          }
-        },
         {
           "type": "STRING",
           "value": "struct"
@@ -435,7 +428,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -461,42 +454,13 @@
         }
       ]
     },
-    "attribute_list": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "[["
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "attribute"
-              },
-              {
-                "type": "STRING",
-                "value": ","
-              }
-            ]
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "attribute"
-        },
-        {
-          "type": "STRING",
-          "value": "]]"
-        }
-      ]
-    },
     "attribute": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
         {
           "type": "SYMBOL",
           "name": "identifier"
@@ -512,8 +476,36 @@
                   "value": "("
                 },
                 {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "literal_or_identifier"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      }
+                    ]
+                  }
+                },
+                {
                   "type": "SYMBOL",
                   "name": "literal_or_identifier"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 },
                 {
                   "type": "STRING",
@@ -597,7 +589,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_list"
+            "name": "attribute"
           }
         },
         {
@@ -1310,13 +1302,6 @@
         {
           "type": "STRING",
           "value": ":"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "attribute_list"
-          }
         },
         {
           "type": "FIELD",

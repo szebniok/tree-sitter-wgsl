@@ -60,39 +60,11 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
-            "named": true
+            "type": "_",
+            "named": false
           },
           {
-            "type": "bitcast_expression",
-            "named": true
-          },
-          {
-            "type": "composite_value_decomposition_expression",
-            "named": true
-          },
-          {
-            "type": "const_literal",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "subscript_expression",
-            "named": true
-          },
-          {
-            "type": "type_constructor_or_function_call_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
+            "type": "lhs_expression",
             "named": true
           }
         ]
@@ -139,6 +111,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "compound_assignment_operator",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -415,6 +397,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "compound_assignment_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "compound_statement",
@@ -758,7 +745,43 @@
           "named": true
         },
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "bitcast_expression",
+          "named": true
+        },
+        {
+          "type": "composite_value_decomposition_expression",
+          "named": true
+        },
+        {
           "type": "const_expression",
+          "named": true
+        },
+        {
+          "type": "const_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "subscript_expression",
+          "named": true
+        },
+        {
+          "type": "type_constructor_or_function_call_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         },
         {
@@ -829,6 +852,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "lhs_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "postfix_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -995,6 +1037,57 @@
     }
   },
   {
+    "type": "postfix_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "bitcast_expression",
+          "named": true
+        },
+        {
+          "type": "composite_value_decomposition_expression",
+          "named": true
+        },
+        {
+          "type": "const_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "postfix_expression",
+          "named": true
+        },
+        {
+          "type": "subscript_expression",
+          "named": true
+        },
+        {
+          "type": "type_constructor_or_function_call_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "return_statement",
     "named": true,
     "fields": {},
@@ -1070,7 +1163,7 @@
           "named": true
         },
         {
-          "type": "type_alias",
+          "type": "type_alias_declaration",
           "named": true
         }
       ]
@@ -1275,17 +1368,13 @@
     "fields": {}
   },
   {
-    "type": "type_alias",
+    "type": "type_alias_declaration",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
@@ -1407,6 +1496,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
         {
           "type": "variable_identifier_declaration",
           "named": true
@@ -1531,11 +1624,19 @@
     "named": false
   },
   {
+    "type": "%=",
+    "named": false
+  },
+  {
     "type": "&",
     "named": false
   },
   {
     "type": "&&",
+    "named": false
+  },
+  {
+    "type": "&=",
     "named": false
   },
   {
@@ -1551,7 +1652,15 @@
     "named": false
   },
   {
+    "type": "*=",
+    "named": false
+  },
+  {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": "+=",
     "named": false
   },
   {
@@ -1560,6 +1669,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": "-=",
     "named": false
   },
   {
@@ -1576,6 +1689,10 @@
   },
   {
     "type": "//",
+    "named": false
+  },
+  {
+    "type": "/=",
     "named": false
   },
   {
@@ -1635,11 +1752,15 @@
     "named": false
   },
   {
-    "type": "array",
+    "type": "^=",
     "named": false
   },
   {
-    "type": "atomic",
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "array",
     "named": false
   },
   {
@@ -1768,6 +1889,10 @@
   },
   {
     "type": "mat4x4",
+    "named": false
+  },
+  {
+    "type": "override",
     "named": false
   },
   {
@@ -2052,6 +2177,10 @@
   },
   {
     "type": "|",
+    "named": false
+  },
+  {
+    "type": "|=",
     "named": false
   },
   {

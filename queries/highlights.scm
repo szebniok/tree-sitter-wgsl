@@ -33,6 +33,7 @@
     "workgroup"
     "write"
     (texel_format)
+    "override"
 ] @keyword ; TODO reserved keywords
 
 [

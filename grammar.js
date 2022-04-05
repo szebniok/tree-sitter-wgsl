@@ -24,7 +24,7 @@ module.exports = grammar({
     ],
 
     rules: {
-        source_file: $ => repeat($._declaration),
+        source_file: $ => seq(repeat($.enable_directive), repeat($._declaration)),
 
         comment: $ => seq("//", /.*/),
 
@@ -32,22 +32,27 @@ module.exports = grammar({
             ";",
             seq($.global_variable_declaration, ";"),
             seq($.global_constant_declaration, ";"),
-            seq($.type_alias, ";"),
+            seq($.type_alias_declaration, ";"),
             seq($.struct_declaration, ";"),
             $.function_declaration,
-            seq($.enable_directive, ";")
         ),
 
         global_variable_declaration: $ => seq(
             repeat($.attribute), $.variable_declaration, optional(seq("=", $.const_expression))
         ),
 
-        global_constant_declaration: $ => seq(
-            repeat($.attribute), "let", $.variable_identifier_declaration, optional(seq("=", $.const_expression))
+        global_constant_declaration: $ => choice(
+            seq("let", choice($.identifier, $.variable_identifier_declaration), "=", $.const_expression),
+            seq(repeat($.attribute), "override", choice($.identifier, $.variable_identifier_declaration), optional(seq("=", $._expression)))
+        ),
+        
+        const_expresssion: $ => choice(
+            seq($.type_declaration, "(", optional(seq(repeat(seq($.const_expression, ",")), $.const_expression, optional(","))), ")"),
+            $.const_literal
         ),
 
-        type_alias: $ => seq(
-            "type", $.identifier, "=", repeat($.attribute), $.type_declaration
+        type_alias_declaration: $ => seq(
+            "type", $.identifier, "=", $.type_declaration
         ),
 
         const_expression: $ => prec.left(choice(
@@ -88,7 +93,7 @@ module.exports = grammar({
             ";"
         ),
 
-        enable_directive: $ => seq("enable", $.identifier),
+        enable_directive: $ => seq("enable", $.identifier, ";"),
 
         attribute: $ => seq(
             "@",
@@ -110,7 +115,7 @@ module.exports = grammar({
             $.identifier,
         ),
 
-        identifier: $ => /[a-zA-Z][0-9a-zA-Z_]*/,
+        identifier: $ => /([a-zA-Z_][0-9a-zA-Z][0-9a-zA-Z_]*)|([a-zA-Z][0-9a-zA-Z_]*)/,
 
         parameter_list: $ => seq(
             repeat(
@@ -141,11 +146,16 @@ module.exports = grammar({
 
         compound_statement: $ => seq("{", repeat($._statement), "}"),
 
-        assignment_statement: $ => seq(
-            field("left", $._expression), // TODO singular expression
-            "=",
-            field("right", $._expression),
+        assignment_statement: $ => choice(
+            seq(
+                field("left", $.lhs_expression),
+                choice("=", $.compound_assignment_operator),
+                field("right", $._expression),
+            ),
+            seq(field("left", "_"), "=", field("right", $._expression))
         ),
+        
+        compound_assignment_operator: $ => choice(...["+", "-", "*", "/", "%", "&", "|", "^"].map(op => `${op}=`)),
 
         if_statement: $ => seq(
             "if",
@@ -233,7 +243,7 @@ module.exports = grammar({
         ),
 
         variable_declaration: $ => seq(
-            "var", optional($.variable_qualifier), $.variable_identifier_declaration
+            "var", optional($.variable_qualifier), choice($.identifier, $.variable_identifier_declaration)
         ),
 
         variable_qualifier: $ => seq(
@@ -261,6 +271,7 @@ module.exports = grammar({
             $.binary_expression,
             $.unary_expression,
             $.subscript_expression,
+            // $.postfix_expression,
             $.identifier,
         ),
 
@@ -282,7 +293,7 @@ module.exports = grammar({
         parenthesized_expression: $ => seq("(", $._expression, ")"),
 
         type_constructor_or_function_call_expression: $ => seq(
-            $.type_declaration,
+            choice($.type_declaration, $._vec_prefix, $._mat_prefix),
             $.argument_list_expression
         ),
 
@@ -292,15 +303,13 @@ module.exports = grammar({
             "i32",
             "f32",
             "i32",
-            ...[2, 3, 4].map(n => "vec" + n).map(t => withTypeParameter($, t)),
-            ...cartesianProduct([2, 3, 4], [2, 3, 4]).map(([n, m]) => `mat${n}x${m}`).map(t => withTypeParameter($, t)),
-            withTypeParameter($, "atomic", choice("u32", "i32")),
+            seq($._vec_prefix, "<", $.type_declaration, ">"),
+            seq($._mat_prefix, "<", $.type_declaration, ">"),
             seq(
-                //repeat($.attribute_list), // TODO ambiguous grammar? conflicting with variable_identifier_declaration
                 "array",
                 "<",
                 $.type_declaration,
-                optional(seq(",", $.int_literal)),
+                optional(seq(",", choice($.int_literal, $.identifier))),
                 ">"
             ),
             seq("ptr", "<", $.storage_class, ",", $.type_declaration, optional(seq(",", $.access_mode)), ">"),
@@ -316,6 +325,10 @@ module.exports = grammar({
                 .map(t => seq(t, "<", $.texel_format, ",", $.access_mode, ">")),
             $.identifier,
         ),
+
+        _vec_prefix: $ => choice(...[2, 3, 4].map(n => "vec" + n)),
+
+        _mat_prefix: $ => choice(...cartesianProduct([2, 3, 4], [2, 3, 4]).map(([n, m]) => `mat${n}x${m}`)),
 
         texel_format: $ => choice(
             ...cartesianProduct(["r8", "rg8"], ["unorm", "snorm", "uint", "sint"]).map(([t, s]) => t + s),
@@ -379,10 +392,24 @@ module.exports = grammar({
                 field("argument", $._expression)
             )
         ),
+        
+        postfix_expression: $ => choice( // TODO completely replace the subscript_expression and composite_value_decomposition_expression
+            seq("[", $._expression, "]", optional($.postfix_expression)),
+            seq(".", $.identifier, optional($.postfix_expression))
+        ),
 
         subscript_expression: $ => prec(PREC.UNARY, seq(
             field("value", $._expression), "[", field("subscript", $._expression), "]"
         )),
+        
+        lhs_expression: $ => seq(
+            repeat(choice("*", "&")),
+            choice(
+                $.identifier, 
+                // seq("(", $.lhs_expression, ")")
+            ),
+            optional($.postfix_expression) // TODO add postfix_expression
+        ),
 
         composite_value_decomposition_expression: $ => prec(PREC.UNARY, seq(
             field("value", $._expression), ".", field("accessor", $.identifier)

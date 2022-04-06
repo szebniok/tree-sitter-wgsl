@@ -33,7 +33,7 @@ module.exports = grammar({
             seq($.global_variable_declaration, ";"),
             seq($.global_constant_declaration, ";"),
             seq($.type_alias_declaration, ";"),
-            seq($.struct_declaration, ";"),
+            $.struct_declaration,
             $.function_declaration,
         ),
 
@@ -81,16 +81,13 @@ module.exports = grammar({
             "struct",
             field("name", $.identifier),
             "{",
-            field("body", optional($.struct_member_list)),
+            field("body", seq(repeat(seq($.struct_member, ",")), $.struct_member, optional(","))),
             "}"
         ),
-
-        struct_member_list: $ => repeat1($.struct_member),
 
         struct_member: $ => seq(
             repeat($.attribute),
             $.variable_identifier_declaration,
-            ";"
         ),
 
         enable_directive: $ => seq("enable", $.identifier, ";"),
@@ -137,6 +134,7 @@ module.exports = grammar({
             $.switch_statement,
             $.loop_statement,
             $.for_statement,
+            $.while_statement,
             $.break_statement,
             $.continue_statement,
             $.discard_statement,
@@ -159,34 +157,27 @@ module.exports = grammar({
 
         if_statement: $ => seq(
             "if",
-            field("condition", $.parenthesized_expression),
+            field("condition", $._expression),
             field("consequence", $.compound_statement),
-            repeat(field("alternative", $.elseif_statement)),
-            field("alternative", optional($.else_statement))
+            optional(seq("else", field("alternative", $.else_statement)))
         ),
 
-        elseif_statement: $ => seq(
-            "elseif",
-            $.parenthesized_expression,
+        else_statement: $ => choice(
             $.compound_statement,
-        ),
-
-        else_statement: $ => seq(
-            "else",
-            $.compound_statement,
+            $.if_statement
         ),
 
         switch_statement: $ => seq(
             "switch",
-            $.parenthesized_expression,
+            $._expression,
             "{",
             repeat1($.switch_body),
             "}"
         ),
 
         switch_body: $ => choice(
-            seq("case", $.case_selectors, ":", "{", optional($.case_body), "}"),
-            seq("default", ":", "{", $.case_body, "}")
+            seq("case", $.case_selectors, optional(":"), $.case_compound_statement),
+            seq("default", optional(":"), $.case_compound_statement)
         ),
 
         case_selectors: $ => seq(
@@ -194,11 +185,12 @@ module.exports = grammar({
             repeat(seq(",", $.const_literal)),
             optional(",")
         ),
-
-        case_body: $ => choice(
-            seq($._statement, $.case_body),
-            seq("fallthrough", ";")
+        
+        case_compound_statement: $ => seq(
+            "{", repeat($._statement), optional($.fallthrough_statement), "}" 
         ),
+
+        fallthrough_statement: $ => seq("fallthrough", ";"),
 
         loop_statement: $ => seq(
             "loop", "{", repeat($._statement), optional($.continuing_statement), "}"
@@ -217,12 +209,22 @@ module.exports = grammar({
             ";",
             optional(choice($.assignment_statement, $.type_constructor_or_function_call_expression))
         ),
+        
+        while_statement: $ => seq(
+            "while", field("condition", $._expression), $.compound_statement
+        ),
 
         break_statement: $ => seq("break", ";"),
 
+        break_if_statement: $ => seq("break", "if", $._expression, ";"),
+
         continue_statement: $ => seq("continue", ";"),
 
-        continuing_statement: $ => seq("continuing", $.compound_statement),
+        continuing_statement: $ => seq("continuing", $.continuing_compound_statement),
+        
+        continuing_compound_statement: $ => seq(
+            "{", repeat($._statement), optional($.break_if_statement), "}"
+        ),
 
         return_statement: $ => seq("return", optional($._expression)),
 
@@ -248,7 +250,7 @@ module.exports = grammar({
 
         variable_qualifier: $ => seq(
             "<",
-            $.storage_class,
+            $.address_space,
             optional(seq(",", $.access_mode)),
             ">"
         ),
@@ -312,7 +314,7 @@ module.exports = grammar({
                 optional(seq(",", choice($.int_literal, $.identifier))),
                 ">"
             ),
-            seq("ptr", "<", $.storage_class, ",", $.type_declaration, optional(seq(",", $.access_mode)), ">"),
+            seq("ptr", "<", $.address_space, ",", $.type_declaration, optional(seq(",", $.access_mode)), ">"),
             "sampler",
             "sampler_comparison",
             ...["2d", "2d_array", "cube", "cube_array", "multisampled_2d"]
@@ -338,7 +340,7 @@ module.exports = grammar({
             "rg11b10float"
         ),
 
-        storage_class: $ => choice("function", "private", "workgroup", "uniform", "storage"),
+        address_space: $ => choice("function", "private", "workgroup", "uniform", "storage"),
 
         access_mode: $ => choice("read", "write", "read_write"),
 

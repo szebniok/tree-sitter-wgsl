@@ -81,7 +81,7 @@ module.exports = grammar({
             "struct",
             field("name", $.identifier),
             "{",
-            field("body", seq(repeat(seq($.struct_member, ",")), $.struct_member, optional(","))),
+            seq(repeat(seq($.struct_member, ",")), $.struct_member, optional(",")),
             "}"
         ),
 
@@ -98,15 +98,15 @@ module.exports = grammar({
             optional(
                 seq(
                     "(",
-                    repeat(seq($.literal_or_identifier, ",")),
-                    $.literal_or_identifier,
+                    repeat(seq($._literal_or_identifier, ",")),
+                    $._literal_or_identifier,
                     optional(","),
                     ")"
                 )
             )
         ),
 
-        literal_or_identifier: $ => choice(
+        _literal_or_identifier: $ => choice(
             $.float_literal,
             $.int_literal,
             $.identifier,
@@ -140,6 +140,8 @@ module.exports = grammar({
             $.discard_statement,
             seq($.return_statement, ";"),
             seq($.variable_statement, ";"),
+            $.increment_statement,
+            $.decrement_statement
         ),
 
         compound_statement: $ => seq("{", repeat($._statement), "}"),
@@ -202,12 +204,25 @@ module.exports = grammar({
 
         for_header: $ => seq(
             optional(
-                choice($.variable_statement, $.assignment_statement, $.type_constructor_or_function_call_expression)
+                choice(
+                    $.variable_statement,
+                    $.assignment_statement,
+                    $.type_constructor_or_function_call_expression,
+                    $.increment_statement,
+                    $.decrement_statement
+                )
             ),
             ";",
             optional($._expression),
             ";",
-            optional(choice($.assignment_statement, $.type_constructor_or_function_call_expression))
+            optional(
+                choice(
+                    $.increment_statement,
+                    $.decrement_statement,
+                    $.assignment_statement,
+                    $.type_constructor_or_function_call_expression
+                )
+            )
         ),
         
         while_statement: $ => seq(
@@ -261,6 +276,11 @@ module.exports = grammar({
             field("type", $.type_declaration)
         ),
 
+        increment_statement: $ => seq($.lhs_expression, "++"),
+
+        decrement_statement: $ => seq($.lhs_expression, "--"),
+
+
 
         // EXPRESSIONS
 
@@ -273,7 +293,6 @@ module.exports = grammar({
             $.binary_expression,
             $.unary_expression,
             $.subscript_expression,
-            // $.postfix_expression,
             $.identifier,
         ),
 
@@ -333,11 +352,8 @@ module.exports = grammar({
         _mat_prefix: $ => choice(...cartesianProduct([2, 3, 4], [2, 3, 4]).map(([n, m]) => `mat${n}x${m}`)),
 
         texel_format: $ => choice(
-            ...cartesianProduct(["r8", "rg8"], ["unorm", "snorm", "uint", "sint"]).map(([t, s]) => t + s),
-            ...cartesianProduct(["r16", "rg16", "rgba16", "r32", "rg32", "rgba32"], ["uint", "sint", "float"]).map(([t, s]) => t + s),
-            ...["unorm", "unorm_srgb", "snorm", "uint", "sint"].map(s => "rgba8" + s),
-            "rg10a2unorm",
-            "rg11b10float"
+            ...["unorm", "snorm", "uint", "sint"].map(s => "rgba8" + s),
+            ...cartesianProduct(["rgba16", "r32", "rg32", "rgba32"], ["uint", "sint", "float"]).map(([t, s]) => t + s)
         ),
 
         address_space: $ => choice("function", "private", "workgroup", "uniform", "storage"),
@@ -395,11 +411,14 @@ module.exports = grammar({
             )
         ),
         
-        postfix_expression: $ => choice( // TODO completely replace the subscript_expression and composite_value_decomposition_expression
-            seq("[", $._expression, "]", optional($.postfix_expression)),
-            seq(".", $.identifier, optional($.postfix_expression))
-        ),
-
+        postfix_expression: $ => prec.left(PREC.UNARY, seq( // TODO consider replacing the subscript_expression and composite_value_decomposition_expression
+            choice(
+                seq("[", $._expression, "]", optional($.postfix_expression)),
+                seq(".", $.identifier, optional($.postfix_expression))
+            ),
+            optional($.postfix_expression)
+        )),
+        
         subscript_expression: $ => prec(PREC.UNARY, seq(
             field("value", $._expression), "[", field("subscript", $._expression), "]"
         )),
@@ -408,9 +427,9 @@ module.exports = grammar({
             repeat(choice("*", "&")),
             choice(
                 $.identifier, 
-                // seq("(", $.lhs_expression, ")")
+                seq("(", $.lhs_expression, ")")
             ),
-            optional($.postfix_expression) // TODO add postfix_expression
+            optional($.postfix_expression)
         ),
 
         composite_value_decomposition_expression: $ => prec(PREC.UNARY, seq(

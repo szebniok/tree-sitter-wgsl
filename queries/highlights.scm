@@ -93,6 +93,8 @@
     "~"
     "^"
     "@"
+    "++"
+    "--"
 ] @operator
 
 (attribute

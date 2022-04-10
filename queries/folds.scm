@@ -6,4 +6,5 @@
     (switch_body)
     (loop_statement)
     (for_statement)
+    (while_statement)
 ] @fold

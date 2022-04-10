@@ -1,18 +1,24 @@
-(const_literal) @number
+(identifier) @variable
+(int_literal) @number
+(float_literal) @float
+(bool_literal) @boolean
 
 (type_declaration) @type
 
 (function_declaration
     (identifier) @function)
 
+(parameter
+    (variable_identifier_declaration (identifier) @parameter))
+
 (struct_declaration
     (identifier) @structure)
+	
+(struct_declaration
+	(struct_member (variable_identifier_declaration (identifier) @field)))
 
 (type_constructor_or_function_call_expression
     (type_declaration) @function)
-
-(parameter
-    (variable_identifier_declaration (identifier) @parameter))
 
 [
     "struct"
@@ -25,37 +31,28 @@
     "private"
     "read"
     "read_write"
-    "return"
     "storage"
     "type"
     "uniform"
     "var"
     "workgroup"
     "write"
-    (texel_format)
     "override"
-] @keyword ; TODO reserved keywords
+    (texel_format)
+] @keyword
 
-[
-    (true)
-    (false)
-] @boolean
+"fn" @keyword.function
+
+"return" @keyword.return
 
 [ "," "." ":" ";" ] @punctuation.delimiter
 
-;; brackets
-[
-    "("
-    ")"
-    "["
-    "]"
-    "{"
-    "}"
-] @punctuation.bracket
+["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 
 [
     "loop"
     "for"
+    "while"
     "break"
     "continue"
     "continuing"
@@ -64,7 +61,6 @@
 [
     "if"
     "else"
-    "elseif"
     "switch"
     "case"
     "default"
@@ -98,7 +94,7 @@
 ] @operator
 
 (attribute
-    (identifier) @property)
+    (identifier) @attribute)
 
 (comment) @comment
 

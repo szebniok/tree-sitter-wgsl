@@ -323,7 +323,7 @@ module.exports = grammar({
             "u32",
             "i32",
             "f32",
-            "i32",
+            "f16",
             seq($._vec_prefix, "<", $.type_declaration, ">"),
             seq($._mat_prefix, "<", $.type_declaration, ">"),
             seq(
@@ -340,7 +340,7 @@ module.exports = grammar({
                 .map(s => "texture_depth_" + s),
             ...["1d", "2d", "2d_array", "3d", "cube", "cube_array", "multisampled_2d"]
                 .map(s => "texture_" + s)
-                .map(t => withTypeParameter($, t, choice("f32", "i32", "u32"))),
+                .map(t => withTypeParameter($, t, choice("f16", "f32", "i32", "u32"))),
             ...["1d", "2d", "2d_array", "3d"]
                 .map(s => "texture_storage_" + s)
                 .map(t => seq(t, "<", $.texel_format, ",", $.access_mode, ">")),

@@ -2082,6 +2082,10 @@
     "named": false
   },
   {
+    "type": "f16",
+    "named": false
+  },
+  {
     "type": "f32",
     "named": false
   },

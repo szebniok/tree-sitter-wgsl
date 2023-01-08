@@ -64,7 +64,7 @@ bool tree_sitter_wgsl_external_scanner_scan(
 					return true;
 				}
 			}
-		} else if (at_eof(lexer)){
+		} else if (at_eof(lexer)) {
 			return false;
 		} else {
 			advance(lexer);

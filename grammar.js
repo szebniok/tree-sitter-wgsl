@@ -31,11 +31,6 @@ module.exports = grammar({
     rules: {
         source_file: $ => seq(repeat($.enable_directive), repeat($._declaration)),
 
-        comment: $ => choice(
-            $.line_comment,
-            $.block_comment,
-        ),
-
         line_comment: $ => token(seq('//', /.*/)),
 
         _declaration: $ => choice(

@@ -7,4 +7,5 @@ build
 /parser.obj
 /scanner.obj
 target
+.ccls-cache
 Cargo.lock

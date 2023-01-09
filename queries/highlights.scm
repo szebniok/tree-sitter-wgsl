@@ -1,8 +1,8 @@
-(identifier) @variable
 (int_literal) @number
 (float_literal) @float
 (bool_literal) @boolean
 
+(type_declaration [ "bool" "u32" "i32" "f16" "f32" ] @type.builtin)
 (type_declaration) @type
 
 (function_declaration
@@ -16,6 +16,11 @@
 
 (struct_declaration
     (struct_member (variable_identifier_declaration (identifier) @field)))
+
+(attribute
+    (identifier) @attribute)
+
+(identifier) @variable
 
 (type_constructor_or_function_call_expression
     (type_declaration) @function.call)
@@ -50,7 +55,7 @@
 
 "return" @keyword.return
 
-[ "," "." ":" ";" ] @punctuation.delimiter
+[ "," "." ":" ";" "->" ] @punctuation.delimiter
 
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 
@@ -97,9 +102,6 @@
     "++"
     "--"
 ] @operator
-
-(attribute
-    (identifier) @attribute)
 
 [
     (line_comment)

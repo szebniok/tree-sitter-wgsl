@@ -50,7 +50,7 @@ Please note that both the WebGPU and WGSL spec are still under development.
    parser_config.wgsl = {
        install_info = {
            url = "https://github.com/szebniok/tree-sitter-wgsl",
-           files = {"src/parser.c"}
+           files = {"src/parser.c", "src/scanner.c"}
        },
    }
    

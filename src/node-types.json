@@ -2029,6 +2029,10 @@
     "named": false
   },
   {
+    "type": "alias",
+    "named": false
+  },
+  {
     "type": "array",
     "named": false
   },
@@ -2342,10 +2346,6 @@
   },
   {
     "type": "true",
-    "named": false
-  },
-  {
-    "type": "type",
     "named": false
   },
   {

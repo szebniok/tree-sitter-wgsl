@@ -32,7 +32,7 @@
     "enable"
     "fallthrough"
     "let"
-    "type"
+    "alias"
     "var"
     "override"
     (texel_format)

@@ -57,7 +57,7 @@ module.exports = grammar({
         ),
 
         type_alias_declaration: $ => seq(
-            "type", $.identifier, "=", $.type_declaration
+            "alias", $.identifier, "=", $.type_declaration
         ),
 
         const_expression: $ => prec.left(choice(

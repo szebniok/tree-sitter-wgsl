@@ -47,7 +47,7 @@ module.exports = grammar({
         ),
 
         global_constant_declaration: $ => choice(
-            seq("let", choice($.identifier, $.variable_identifier_declaration), "=", $.const_expression),
+            seq("const", choice($.identifier, $.variable_identifier_declaration), "=", $.const_expression),
             seq(repeat($.attribute), "override", choice($.identifier, $.variable_identifier_declaration), optional(seq("=", $._expression)))
         ),
         
